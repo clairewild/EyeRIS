@@ -9,41 +9,70 @@ class App extends React.Component {
     super(props);
     this.state = {
       connected: false,
-      audioRecord: false
+      recordingMuse: false,
+      recordingAudio: false,
+      client: null
     };
-    this.museConnect = this.museConnect.bind(this);
+    this.connect = this.connect.bind(this);
+    this.recordMuse = this.recordMuse.bind(this);
+    this.saveCSV = this.saveCSV.bind(this);
+    
     this.startAudioRecording = this.startAudioRecording.bind(this);
     this.stopAudioRecording = this.stopAudioRecording.bind(this);
   }
   
-  async museConnect() {
+  async connect() {
     let client = new MuseClient();
     await client.connect();
     await client.start();
     
+
     client.eegReadings.subscribe(reading => {
       this.plot(reading)
+
+      this.setState({
+        connected: true,
+        client: client
+      });
     });
+  }
+  
+  async recordMuse() {
+    this.setState({ recordingMuse: true });
     
-    this.setState({
-      connected: true
+    let samples = [];
+    let client = this.state.client;
+    await client.eegReadings.subscribe(reading => {
+      reading.samples.forEach(s => {
+        samples.push([reading.timestamp, reading.electrode, s]);
+      });  
     });
+    await window.setInterval(() => this.saveCSV(samples), 5000);
+  }
+  
+  async saveCSV(samples) {
+    this.setState({ recordingMuse: false });
+    
+    const a = document.createElement('a');
+    const headers = ["time", "electrode", "microvolts"].join(",");
+    const csvData = headers + "\n" + samples.map(item => item.join(",")).join("\n");
+    const file = new Blob([csvData], { type: "text/csv" });
+    a.href = URL.createObjectURL(file);
+    document.body.appendChild(a);
+    a.download = "museRecording.csv";
+    a.click();
+    document.body.removeChild(a);
   }
   
   async startAudioRecording() {
-    this.setState({
-      audioRecord: true
-    });
+    this.setState({ recordingAudio: true });
   }
   
   async stopAudioRecording() {
-    this.setState({
-      audioRecord: false
-    });  
+    this.setState({ recordingAudio: false });  
   }
   
   async saveAudioFile(recordedBlob) {
-    console.log('recordedBlob is: ', recordedBlob);
     const a = document.createElement('a');
     const file = new Blob([recordedBlob.blobURL], { type: "text/csv" });
     a.href = URL.createObjectURL(file);
@@ -90,7 +119,9 @@ class App extends React.Component {
   }
   
   render() {
-    const message = this.state.connected ? "We're listening to your brain activity!" : "Click the button to connect.";
+    const button = (this.state.connected) ? 
+      <button onClick={ this.recordMuse }>START RECORDING</button> :
+      <button onClick={ this.connect }>CONNECT MUSE</button>;
     
     return (
       <div className="App">
@@ -98,7 +129,7 @@ class App extends React.Component {
           <h1 className="App-title">Eyeris</h1>
         </header>
         
-        <p className="App-intro">{ message }</p>
+        { (this.state.recordingMuse) ? <p>We are recording your brain activity</p> : button }
         
         <button onClick={ this.museConnect }>Start brain recording</button>
         
@@ -131,17 +162,16 @@ class App extends React.Component {
         <br/>
         
         <ReactMic
-          record={this.state.audioRecord}         
-          className={"mic"}      
-          onStop={this.saveAudioFile}       
-          strokeColor={"red"}    
-          backgroundColor={"black"}
+          record={ this.state.recordingAudio }         
+          className={ "mic" }      
+          onStop={ this.saveAudioFile }       
+          strokeColor={ "red" }    
+          backgroundColor={ "black" }
         />
         <br/>
         <br/>
         <button onClick={ this.startAudioRecording }>Start audio recording</button>
         <button onClick={ this.stopAudioRecording }>Stop audio recording</button>
-
       </div>
     );
   }
