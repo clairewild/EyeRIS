@@ -1,1 +1,12 @@
+.MusePanel-div {
+  
+}
 
+.electrode-set {
+  justify-content: center;
+  display: flex;
+}
+
+.electrode-item {
+  display: flex;
+}

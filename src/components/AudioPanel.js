@@ -38,7 +38,7 @@ class AudioPanel extends React.Component {
       <button onClick={ this.recordAudio }>RECORD AUDIO</button>;
     
     return (
-      <div>    
+      <div className="AudioPanel-div">    
         { audioButton }
         
         <ReactMic record={ this.state.recordingAudio }         
