@@ -9,7 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       connected: false,
-      record: false
+      audioRecord: false
     };
     this.museConnect = this.museConnect.bind(this);
     this.startAudioRecording = this.startAudioRecording.bind(this);
@@ -32,18 +32,25 @@ class App extends React.Component {
   
   async startAudioRecording() {
     this.setState({
-      record: true
+      audioRecord: true
     });
   }
   
   async stopAudioRecording() {
     this.setState({
-      record: false
+      audioRecord: false
     });  
   }
   
   async saveAudioFile(recordedBlob) {
     console.log('recordedBlob is: ', recordedBlob);
+    const a = document.createElement('a');
+    const file = new Blob([recordedBlob.blobURL], { type: "text/csv" });
+    a.href = URL.createObjectURL(file);
+    document.body.appendChild(a);
+    a.download = "audioRecording.csv";
+    a.click();
+    document.body.removeChild(a);
   }
   
   render() {
@@ -63,7 +70,7 @@ class App extends React.Component {
         <br/>
         
         <ReactMic
-          record={this.state.record}         
+          record={this.state.audioRecord}         
           className={"mic"}      
           onStop={this.saveAudioFile}       
           strokeColor={"red"}    
