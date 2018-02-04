@@ -27,12 +27,12 @@ class App extends React.Component {
   }
   
   render() {
-    const message = this.state.connected ? "You are connected!" : "Click the button to connect.";
+    const message = this.state.connected ? "We're listening to your brain activity!" : "Click the button to connect.";
     
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Neurofeedback Experimenting...</h1>
+          <h1 className="App-title">Eyeris</h1>
         </header>
         
         <p className="App-intro">{ message }</p>
