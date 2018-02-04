@@ -75,7 +75,7 @@ class MusePanel extends React.Component {
     }
     const width = canvas.width / 12.0;
     const height = canvas.height / 2.0;
-    context.fillStyle = 'green';
+    context.fillStyle = 'blue';
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < reading.samples.length; i++) {
@@ -94,11 +94,13 @@ class MusePanel extends React.Component {
   
   render() {
     const museButton = (this.state.connected) ? 
-      <button onClick={ this.recordMuse }>START RECORDING</button> :
-      <button onClick={ this.connect }>CONNECT MUSE</button>;
+      <button className="MusePanel-button" onClick={ this.recordMuse }>START RECORDING</button> :
+      <button className="MusePanel-button" onClick={ this.connect }>CONNECT MUSE</button>;
     
     return (
       <div className="MusePanel-div"> 
+        <img className="MusePanel-background" src="https://res.cloudinary.com/dq5kxnx9d/image/upload/v1517768136/background1_g8prrp.jpg" />
+      
         <div className="MusePanel-animation">
           { (this.state.recordingMuse) ? this.renderAnnimation() : museButton } 
         </div>
