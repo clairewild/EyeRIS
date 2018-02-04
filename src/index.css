@@ -3,3 +3,23 @@ body {
   margin: 0;
   font-family: sans-serif;
 }
+
+button {
+  border: white 2px solid;
+  padding: 2em;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: white;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  color: #777;
+  background-color: white;
+}
+
+button:focus {
+  outline: none;
+}

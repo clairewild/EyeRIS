@@ -1,3 +1,13 @@
 .AudioPanel-div {
-  
+  background-color: #222;
+  display: flex;
+  flex-direction: column;
+}
+
+.AudioPanel-button {
+  padding: 10%;
+}
+
+.AudioPanel-footer {
+  padding-top: 10%;
 }

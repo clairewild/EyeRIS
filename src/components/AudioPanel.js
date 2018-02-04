@@ -38,14 +38,20 @@ class AudioPanel extends React.Component {
       <button onClick={ this.recordAudio }>RECORD AUDIO</button>;
     
     return (
-      <div className="AudioPanel-div">    
-        { audioButton }
+      <div className="AudioPanel-div">  
+        <div className="AudioPanel-button">
+          { audioButton }
+        </div>
         
         <ReactMic record={ this.state.recordingAudio }         
                   className="mic"      
                   onStop={ this.saveAudioFile }       
-                  strokeColor="red" 
-                  backgroundColor="black" />
+                  strokeColor="blue" 
+                  backgroundColor="#222" />
+                  
+        <div className="AudioPanel-footer">
+          <p>by Akansh Murthy, Claire Wild, Joe Attak, and Joyce Bao</p>
+        </div>
       </div>
     );
   }
