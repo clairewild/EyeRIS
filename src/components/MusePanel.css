@@ -1,21 +1,31 @@
-.MusePanel-div {
-  background-color: #777;
+.MusePanel-background {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  z-index: -10;
+  opacity: 0.4;
 }
 
 .MusePanel-animation {
-  padding: 10%;
+  padding: 7%;
+}
+
+.MusePanel-button {
+  color: #222;
+  background-color: white;
+  border-color: #222;
+}
+
+.MusePanel-button:hover {
+  color: white;
+  background-color: #222;
 }
 
 .MusePanel-graphs {
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-.electrode-set {
-  
-}
-
-.electrode-item {
-
+  color: #222;
+  margin-bottom: 5%;
 }

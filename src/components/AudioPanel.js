@@ -30,6 +30,7 @@ class AudioPanel extends React.Component {
     a.download = "audioRecording.csv";
     a.click();
     document.body.removeChild(a);
+    window.alert("Thank you. We're busy analyzing your data.");
   }
   
   render() {    
