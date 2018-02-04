@@ -98,32 +98,36 @@ class MusePanel extends React.Component {
       <button onClick={ this.connect }>CONNECT MUSE</button>;
     
     return (
-      <div className="MusePanel-div">     
-        { (this.state.recordingMuse) ? this.renderAnnimation() : museButton } 
-        
-        <div className="electrode-set">
-          <div className="electrode-item">
-  	        <h3>Electrode 1</h3>
-  	        <canvas id="electrode1"></canvas>
+      <div className="MusePanel-div"> 
+        <div className="MusePanel-animation">
+          { (this.state.recordingMuse) ? this.renderAnnimation() : museButton } 
+        </div>
+      
+        <div className="MusePanel-graphs">
+          <div className="electrode-set">
+            <div className="electrode-item">
+    	        <p>Electrode 1</p>
+    	        <canvas id="electrode1"></canvas>
+            </div>
+            
+            <div className="electrode-item">
+    	        <p>Electrode 2</p>
+    	        <canvas id="electrode2"></canvas>
+            </div>
           </div>
           
-          <div className="electrode-item">
-  	        <h3>Electrode 2</h3>
-  	        <canvas id="electrode2"></canvas>
+          <div className="electrode-set">
+            <div className="electrode-item">
+    	        <p>Electrode 3</p>
+    	        <canvas id="electrode3"></canvas>
+            </div>
+            
+            <div className="electrode-item">
+    	        <p>Electrode 4</p>
+    	        <canvas id="electrode4"></canvas>
+            </div>
           </div>
         </div>
-        
-        <div className="electrode-set">
-          <div className="electrode-item">
-  	        <h3>Electrode 3</h3>
-  	        <canvas id="electrode3"></canvas>
-          </div>
-          
-          <div className="electrode-item">
-  	        <h3>Electrode 4</h3>
-  	        <canvas id="electrode4"></canvas>
-          </div>
-        </div>     
       </div>
     );
   }

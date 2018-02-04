@@ -1,12 +1,21 @@
 .MusePanel-div {
-  
+  background-color: #777;
+}
+
+.MusePanel-animation {
+  padding: 10%;
+}
+
+.MusePanel-graphs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .electrode-set {
-  justify-content: center;
-  display: flex;
+  
 }
 
 .electrode-item {
-  display: flex;
+
 }

@@ -13,6 +13,8 @@ class App extends React.Component {
           <h1 className="App-title">Eyeris</h1>
         </header>
         
+        <img className="App-waves" src="" alt="wave" />
+        
         <MusePanel />
         <AudioPanel />
       </div>
